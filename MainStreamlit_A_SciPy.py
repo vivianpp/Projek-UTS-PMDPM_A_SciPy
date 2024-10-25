@@ -4,7 +4,7 @@ import os
 from streamlit_option_menu import option_menu
 
 def load_model(model_file):
-    model_path = os.path.join(r'C:\Users\ASUS\Documents\Projek UTS PMDPM_A_SciPy', model_file)
+    model_path = os.path.join(r'C:\Users\ASUS\Documents\Projek UTS PMDPM_A_SciPy', 'BestModel_CLF_RF_SciPy.pkl')
     with open(model_path, 'rb') as f:
         return pickle.load(f)
 
