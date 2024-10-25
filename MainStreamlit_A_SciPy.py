@@ -55,7 +55,7 @@ if selected == 'Analisis Kategori Properti':
         st.success(f"Kategori properti: *{kategori_properti}*")
 
 if selected == 'Analisis Harga Properti':
-    st.title('Regresi Harga Properti')
+    st.title('Analisis Harga Properti')
 
     squaremeters = st.slider("Squaremeters", 0, 100000)
     numberofrooms = st.slider("Number of Rooms", 0, 100)
