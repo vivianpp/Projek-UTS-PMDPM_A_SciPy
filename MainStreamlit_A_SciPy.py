@@ -2,14 +2,17 @@ import streamlit as st
 import pickle
 import os
 import numpy as np
+from streamlit_option_menu import option_menu
 
 def load_model(model_file):
     model_path = os.path.join('BestModel_CLF_RF_SciPy.pkl')
     with open(model_path, 'rb') as f:
         return pickle.load(f)
 
-selected = st.sidebar.radio('Pilih Analisis', 
-                            ['Analisis Kategori Properti', 'Analisis Harga Properti'])
+with st.sidebar:
+    selected = option_menu('Pilih Analisis',
+                           ['Analisis Kategori Properti', 'Analisis Harga Properti'],
+                           default_index=0)
 
 rf_model = load_model('BestModel_CLF_RF_SciPy.pkl')
 
