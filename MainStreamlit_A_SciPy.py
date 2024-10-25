@@ -1,10 +1,10 @@
 import streamlit as st
 import pickle
 import os
-from streamlit_option_menu import option_menu
+import numpy as np
 
 def load_model(model_file):
-    model_path = os.path.join(r'C:\Users\ASUS\Documents\Projek UTS PMDPM_A_SciPy', 'BestModel_CLF_RF_SciPy.pkl')
+    model_path = os.path.join('BestModel_CLF_RF_SciPy.pkl')
     with open(model_path, 'rb') as f:
         return pickle.load(f)
 
@@ -17,7 +17,7 @@ def rumah_app():
     st.title("Klasifikasi Jenis Properti")
     st.write("Masukkan fitur properti untuk mengetahui kategori properti.")
 
-    squaremeters = st.number_input("Luas Properti(m2)", min_value=0)
+    squaremeters = st.number_input("Luas Properti (m2)", min_value=0)
     numberofrooms = st.number_input("Jumlah Kamar Dalam Properti", min_value=0)
     hasyard = st.selectbox("Apakah Properti Memiliki Halaman?", ["yes", "no"])
     haspool = st.selectbox("Apakah Properti Memiliki Kolam Renang?", ["yes", "no"])
@@ -28,8 +28,8 @@ def rumah_app():
     made = st.number_input("Tahun Pembuatan Properti", min_value=1900, max_value=2024)
     isnewbuilt = st.selectbox("Apakah Properti Baru / Lama?", ["yes", "no"])
     hasstormprotector = st.selectbox("Apakah Properti Memiliki Pelindung Badai?", ["yes", "no"])
-    basement = st.number_input("Luas Basement Properti(m2)", min_value=0)
-    attic = st.number_input("Luas Loteng Properti(m2)", min_value=0)
+    basement = st.number_input("Luas Basement Properti (m2)", min_value=0)
+    attic = st.number_input("Luas Loteng Properti (m2)", min_value=0)
     garage = st.number_input("Kapasitas Garasi", min_value=0)
     hasstorageroom = st.selectbox("Apakah Properti Memiliki Ruang Penyimpanan?", ["yes", "no"])
     hasguestroom = st.number_input("Berapa Jumlah Kamar Tamu Di Properti?", min_value=0)
@@ -40,6 +40,10 @@ def rumah_app():
     input_isnewbuilt = angkaBinary[isnewbuilt]
     input_hasstormprotector = angkaBinary[hasstormprotector]
     input_hasstorageroom = angkaBinary[hasstorageroom]
+
+    input_data = np.array([[squaremeters, numberofrooms, input_hasyard, input_haspool, floors, citycode, 
+                            citypartrange, numprevowners, made, input_isnewbuilt, input_hasstormprotector, 
+                            basement, attic, garage, input_hasstorageroom, hasguestroom]])
 
     if st.button("Lakukan Prediksi"):
         prediction = rf_model.predict(input_data)[0]
