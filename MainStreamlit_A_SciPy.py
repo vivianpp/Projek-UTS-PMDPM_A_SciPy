@@ -13,7 +13,7 @@ selected = st.sidebar.radio('Pilih Analisis',
 
 rf_model = load_model('BestModel_CLF_RF_SciPy.pkl')
 
-def rumah_app():
+if selected == 'Analisis Kategori Properti':
     st.title("Klasifikasi Jenis Properti")
     st.write("Masukkan fitur properti untuk mengetahui kategori properti.")
 
